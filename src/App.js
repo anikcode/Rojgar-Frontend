@@ -1,27 +1,21 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Provider, useSelector } from "react-redux";
-import { UseSelector } from "react-redux";
+import CakeContainer from "./components/CakeContainer";
+import HookCakeContainer from "./components/HookCakeContainer";
+import IceCreamContainer from "./components/IceCreamContainer";
+import store from "./redux/store";
+
 function App() {
-  const items = useSelector((store) => store.cart.items);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-          {items.length}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <div>
+          <IceCreamContainer />
+          <HookCakeContainer />
+          <CakeContainer />
+        </div>
+      </div>
+    </Provider>
   );
 }
 
