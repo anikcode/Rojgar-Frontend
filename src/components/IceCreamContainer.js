@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import buyIceCream from "../redux/actions/iceCreamActions";
 import { connect } from "react-redux";
+import { getDetails } from "../services/apis";
 
 function IceCreamContainer(props) {
+  useEffect(() => {
+    getDetails();
+  }, []);
   return (
     <div className="App">
       <h2>Number of IceCream - {props.numOfIceCreams}</h2>
