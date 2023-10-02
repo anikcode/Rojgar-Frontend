@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import buyIceCream from "../redux/actions/iceCreamActions";
 import { connect } from "react-redux";
-import { getDetails } from "../services/apis";
+import { GetDetails } from "../services/apis";
 
 function IceCreamContainer(props) {
   useEffect(() => {
-    getDetails();
+    GetDetails();
   }, []);
   return (
     <div className="App">
