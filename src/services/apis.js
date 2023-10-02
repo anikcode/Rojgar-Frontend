@@ -29,3 +29,36 @@ export function GetDetails() {
       }
     });
 }
+
+export function submitDetails(name, email, phone, password) {
+  const body = {
+    name,
+    email,
+    phone,
+    password,
+  };
+  return axios
+    .post(`${config.apiBaseUrl}/opt-in/register`, body)
+    .then((response) => {
+      // Handle successful response
+      const responseBody = response.data;
+      console.log("till here", responseBody);
+      if (responseBody.message === "success") {
+        return responseBody;
+      }
+      const err = responseBody.errorMessage;
+      throw err;
+    })
+    .catch((error) => {
+      console.log("catch error", error);
+      showError(error);
+      if (error?.response?.status === 404) {
+        // Handle 404 error
+
+        console.error("Resource not found h bhaii:", error);
+      } else {
+        // Handle other errors
+        console.error("An error occurred:", error);
+      }
+    });
+}

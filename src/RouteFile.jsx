@@ -1,13 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./components/HomePage";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import IceCreamContainer from "./components/IceCreamContainer";
 import HookCakeContainer from "./components/HookCakeContainer";
+
 import ErrorModal from "./components/ErrorModal";
+import Register from "./components/Register";
 
 function RouteFile(props) {
-  const dispatch = useDispatch();
   const flag = useSelector((state) => state.login.showError);
   const showError = useSelector((state) => state.login.showError);
   return (
@@ -17,7 +18,7 @@ function RouteFile(props) {
           <Route path="/" element={<HomePage />} />
           <Route path="/ice" element={<IceCreamContainer />} />
           <Route path="/hook" element={<HookCakeContainer />} />
-          <Route path="/error" element={<ErrorModal />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
       {flag && <ErrorModal flag={true} />}
