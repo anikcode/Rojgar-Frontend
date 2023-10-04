@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import { submitDetails } from "../services/apis";
-import Register1 from "../images/register-img1.jpg";
-import Register2 from "../images/register-img2.jpg";
-import Register3 from "../images/register-img3.jpg";
+import Register1 from "../images/job.png";
 import Header from "./Header";
+import SwiperDrawer from "./SwiperDrawer";
 function Register() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState();
@@ -13,10 +12,14 @@ function Register() {
   return (
     <>
       <Header />
-      <div className="flex justify-end pr-10 h-[92vh] items-center bg-slate-50">
-        <img src={Register1} className="h-[200px]" />
-        <img src={Register2} className="h-[200px]" />
-        <img src={Register3} className="h-[200px]" />
+      <div className="flex justify-around pr-10 h-[92vh] items-center bg-slate-50">
+        <div>
+          <img src={Register1} className="h-[400px]" />
+          <p className="font-semibold text-3xl mt-5 mb-0 text-gray-400">
+            Featured companies actively hiring :-
+          </p>
+          <SwiperDrawer />
+        </div>
         <div className="shadow-2xl rounded-xl p-10 bg-white">
           <p className="text-3xl font-extrabold mb-2">Create Account</p>
           <p className="text-l font-extrabold flex mb-4">Welcome Guest</p>
