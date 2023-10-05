@@ -4,20 +4,23 @@ import { submitDetails } from "../services/apis";
 import Register1 from "../images/job.png";
 import Header from "./Header";
 import SwiperDrawer from "./SwiperDrawer";
+import { useNavigate } from "react-router-dom";
 function Register() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const validatePassword = confirmPassword === password;
+  const isValidPassword = confirmPassword === password;
   const validateEmail = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
   const handleValidateEmail = (email) => {
     return validateEmail.test(email);
   };
   const isValidEmail = handleValidateEmail(email);
   const canContinue =
-    name !== "" && phone.length == 10 && isValidEmail && validatePassword;
+    name !== "" && phone.length == 10 && isValidEmail && isValidPassword;
+
   return (
     <>
       <Header />
@@ -73,7 +76,7 @@ function Register() {
                 placeholder="min 8 character"
               />
             </p>
-            {!validatePassword && confirmPassword !== "" && (
+            {!isValidPassword && confirmPassword !== "" && (
               <span className="text-red-500 text-xs">
                 Password and confirm password must be same
               </span>
@@ -113,7 +116,7 @@ function Register() {
               />
             </p>
           </div>
-          <div className="flex mt-9">
+          <div className="flex mt-9 mb-4">
             <Button
               onClick={() =>
                 submitDetails(name, email, phone, password, confirmPassword)
@@ -125,6 +128,12 @@ function Register() {
               Submit
             </Button>
           </div>
+          <p className="font-bold">
+            Already have an account?{" "}
+            <span className="underline" onClick={() => navigate("/login")}>
+              Log in
+            </span>
+          </p>
         </div>
       </div>
     </>

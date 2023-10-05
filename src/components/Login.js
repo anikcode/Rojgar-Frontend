@@ -1,11 +1,7 @@
 import React from "react";
 
 function Login() {
-  return (
-    <div>
-      <input type="text" />
-    </div>
-  );
+  return <div>Logged in</div>;
 }
 
 export default Login;
