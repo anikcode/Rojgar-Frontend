@@ -30,12 +30,13 @@ export function GetDetails() {
     });
 }
 
-export function submitDetails(name, email, phone, password) {
+export function submitDetails(name, email, phone, password, confirmPassword) {
   const body = {
     name,
     email,
     phone,
     password,
+    confirmPassword,
   };
   return axios
     .post(`${config.apiBaseUrl}/opt-in/register`, body)
