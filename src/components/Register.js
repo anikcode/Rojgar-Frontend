@@ -130,7 +130,10 @@ function Register() {
           </div>
           <p className="font-bold">
             Already have an account?{" "}
-            <span className="underline" onClick={() => navigate("/login")}>
+            <span
+              className="underline"
+              onClick={() => navigate("/login", { state: { name, phone } })}
+            >
               Log in
             </span>
           </p>
