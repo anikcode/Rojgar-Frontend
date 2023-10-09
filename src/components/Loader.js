@@ -2,6 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 function Loader() {
+  const LoaderWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  `;
   const Loader = styled.div`
     height: 100px;
     width: 100px;
@@ -15,7 +21,11 @@ function Loader() {
       }
     }
   `;
-  return <Loader></Loader>;
+  return (
+    <LoaderWrapper>
+      <Loader></Loader>
+    </LoaderWrapper>
+  );
 }
 
 export default Loader;

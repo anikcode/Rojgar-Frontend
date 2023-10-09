@@ -131,7 +131,7 @@ function Register() {
           <p className="font-bold">
             Already have an account?{" "}
             <span
-              className="underline"
+              className="underline cursor-pointer"
               onClick={() => navigate("/login", { state: { name, phone } })}
             >
               Log in
