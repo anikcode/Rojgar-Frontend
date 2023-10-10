@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import { Button } from "@mui/material";
+import { loginUser } from "../services/apis";
 
 function Login(props) {
   // const location = useLocation();
@@ -10,12 +11,14 @@ function Login(props) {
   // return <div>Logged in {passedProps.name}</div>;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const canContinue = email !== "" && password !== "";
   return (
     <>
       <Header />
       <div className="flex flex-col justify-center pr-10 h-[92vh] items-center bg-slate-50">
         <div className="shadow-2xl rounded-xl p-10 bg-white">
           <div>
+            <p className="text-3xl font-extrabold mb-2">Login</p>
             <p>
               <label className="font-bold flex mt-4">Email</label>
             </p>
@@ -45,15 +48,12 @@ function Login(props) {
           </div>
           <div className="flex mt-4 mb-4">
             <Button
-              // onClick={() =>
-              //   submitDetails(name, email, phone, password, confirmPassword)
-              // }
-
+              onClick={() => loginUser(email, password)}
               variant="contained"
               className="w-[250px]"
-              // disabled={!canContinue}
+              disabled={!canContinue}
             >
-              Submit
+              Login
             </Button>
           </div>
         </div>

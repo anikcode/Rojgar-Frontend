@@ -63,3 +63,24 @@ export function submitDetails(name, email, phone, password, confirmPassword) {
       }
     });
 }
+
+export function loginUser(email, password) {
+  const body = {
+    email,
+    password,
+  };
+  return axios
+    .post(`${config.apiBaseUrl}/opt-in/login`, body)
+    .then((response) => {
+      if (response.message == "success") {
+        return response.message;
+      }
+
+      const err = response.data.errorMessage;
+      console.log(response.data.errorMessage, "errrrrrr");
+      throw err;
+    })
+    .catch((err) => {
+      showError(err);
+    });
+}
