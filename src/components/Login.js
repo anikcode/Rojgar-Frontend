@@ -3,15 +3,27 @@ import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import { Button } from "@mui/material";
 import { loginUser } from "../services/apis";
+import { useNavigate } from "react-router-dom";
 
 function Login(props) {
   // const location = useLocation();
   // const passedProps = location.state;
   // console.log(passedProps);
   // return <div>Logged in {passedProps.name}</div>;
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const canContinue = email !== "" && password !== "";
+  const validateLogin = async (email, password) => {
+    try {
+      const response = await loginUser(email, password);
+      if (response.data.message === "success") {
+        navigate("/homepage");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       <Header />
@@ -48,7 +60,7 @@ function Login(props) {
           </div>
           <div className="flex mt-4 mb-4">
             <Button
-              onClick={() => loginUser(email, password)}
+              onClick={() => validateLogin(email, password)}
               variant="contained"
               className="w-[250px]"
               disabled={!canContinue}

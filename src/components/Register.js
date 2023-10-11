@@ -14,6 +14,27 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const isValidPassword = confirmPassword === password;
   const validateEmail = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+  const registerToLogin = async (
+    name,
+    email,
+    phone,
+    password,
+    confirmPassword
+  ) => {
+    try {
+      const response = await submitDetails(
+        name,
+        email,
+        phone,
+        password,
+        confirmPassword
+      );
+      console.log(response, "reeeeeee");
+      if (response.message === "success") {
+        navigate("/homepage");
+      }
+    } catch (err) {}
+  };
   const handleValidateEmail = (email) => {
     return validateEmail.test(email);
   };
@@ -119,7 +140,7 @@ function Register() {
           <div className="flex mt-9 mb-4">
             <Button
               onClick={() =>
-                submitDetails(name, email, phone, password, confirmPassword)
+                registerToLogin(name, email, phone, password, confirmPassword)
               }
               variant="contained"
               className="w-[250px]"

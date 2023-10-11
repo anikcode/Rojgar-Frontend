@@ -40,7 +40,7 @@ function ErrorModal(props) {
                         class="text-base font-semibold leading-6 text-gray-900"
                         id="modal-title"
                       >
-                        Deactivate account
+                        Something went wrong
                       </h3>
                       <div class="mt-2">
                         <p class="text-sm text-gray-500">{msg}</p>

@@ -16,7 +16,7 @@ function RouteFile(props) {
     <div>
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/homepage" element={<HomePage />} />
           <Route path="/ice" element={<IceCreamContainer />} />
           <Route path="/hook" element={<HookCakeContainer />} />
           <Route path="/register" element={<Register />} />
