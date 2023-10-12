@@ -27,7 +27,30 @@ function Login(props) {
   return (
     <>
       <Header />
-      <div className="flex flex-col justify-center pr-10 h-[92vh] items-center bg-slate-50">
+      <div className="flex flex-row justify-center pr-10 h-[92vh] items-center bg-slate-50">
+        <div className="mr-10">
+          <p className="flex text-5xl font-bold">
+            Find your dream <p className="text-[#447AB1] ml-3"> Job</p>
+          </p>
+          <p className="text-gray-400 text-xl font-semibold mt-7">
+            Collaborating with big companies, we have helped <br></br> thousands
+            of people to find the best job for themselves.
+          </p>
+          <div className="gap-4 flex mt-6">
+            <div className="rounded-xl bg-white shadow-lg p-4 w-fit">
+              <p className="text-[#447AB1] text-3xl font-bold">2000+</p>
+              <div>CVs Received this month</div>
+            </div>
+            <div className="rounded-xl bg-white shadow-lg p-4 w-fit">
+              <p className="text-[#447AB1] text-3xl font-bold">1000+</p>
+              <div>Current Open Positions</div>
+            </div>
+            <div className="rounded-xl bg-white shadow-lg p-4 w-fit">
+              <p className="text-[#447AB1] text-3xl font-bold">500+</p>
+              <div>Daily Job Posting</div>
+            </div>
+          </div>
+        </div>
         <div className="shadow-2xl rounded-xl p-10 bg-white">
           <div>
             <p className="text-3xl font-extrabold mb-2">Login</p>
@@ -40,7 +63,7 @@ function Login(props) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="border p-2 w-[250px] flex border-black rounded"
-                placeholder="Enter your password"
+                placeholder="Enter email id"
               />
             </p>
           </div>

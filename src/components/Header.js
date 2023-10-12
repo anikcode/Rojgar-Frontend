@@ -1,5 +1,5 @@
 import React from "react";
-import rojgar from "../images/rojgar.jpg";
+import rojgar from "../images/rojgar.png";
 
 function Header() {
   return (

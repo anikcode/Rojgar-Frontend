@@ -8,6 +8,7 @@ import ErrorModal from "./components/ErrorModal";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import Loader from "./components/Loader";
+import CreateProfile from "./components/CreateProfile";
 
 function RouteFile(props) {
   const flag = useSelector((state) => state.login.showError);
@@ -22,6 +23,7 @@ function RouteFile(props) {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/loader" element={<Loader />} />
+          <Route path="/create-profile" element={<CreateProfile />} />
         </Routes>
       </Router>
       {flag && <ErrorModal flag={true} />}
