@@ -5,6 +5,7 @@ import Register1 from "../images/job.png";
 import Header from "./Header";
 import SwiperDrawer from "./SwiperDrawer";
 import { useNavigate } from "react-router-dom";
+import CentreModal from "./CentreModal";
 function Register() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -159,6 +160,7 @@ function Register() {
             </span>
           </p>
         </div>
+        <CentreModal />
       </div>
     </>
   );
