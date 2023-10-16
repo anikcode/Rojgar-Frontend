@@ -1,11 +1,14 @@
 import React from "react";
 import Header from "./Header";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import CentreModal from "./CentreModal";
+import PersonalProfileModal from "./PersonalProfileModal";
 
 const CreateProfile = () => {
   return (
     <div>
       <Header />
+      <PersonalProfileModal />
       <div className="bg-slate-50 flex">
         <div className="flex mt-4">
           <div className="border h-[88vh] w-60 mr-10 shadow-lg ml-2 bg-white">

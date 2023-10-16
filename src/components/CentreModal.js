@@ -11,6 +11,7 @@ const Modal = styled.div`
   border-radius: 10px;
   padding: 0px 20px;
   background: white;
+  z-index: 1000;
 `;
 const ModalHeader = styled.div`
   height: 50px;
@@ -22,11 +23,12 @@ const ModalHeader = styled.div`
   padding: 10px;
 `;
 const ModalBody = styled.div`
-  height: 50px;
   width: 100%;
   background: white;
   padding: 15px;
   border-bottom: 1px solid #d9d9d9;
+  max-height: 500px;
+  overflow-y: auto;
 `;
 const ModalFooter = styled.div`
   display: flex;
@@ -37,14 +39,13 @@ const ModalWrapper = styled.div`
   height: 91vh;
   background: rgba(0, 0, 0, 0.7);
   width: 100vw;
-  /* z-index: 10000; */
   position: absolute;
 `;
-const CentreModal = () => (
+const CentreModal = (props) => (
   <ModalWrapper>
     <Modal>
       <ModalHeader>Create Profile</ModalHeader>
-      <ModalBody>Are you sure you want to continue</ModalBody>
+      <ModalBody>{props.children}</ModalBody>
       <ModalFooter>
         <Button variant="contained">Save</Button>
         <Button variant="outlined" className="ml-5">

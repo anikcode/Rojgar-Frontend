@@ -160,7 +160,6 @@ function Register() {
             </span>
           </p>
         </div>
-        <CentreModal />
       </div>
     </>
   );
