@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CentreModal from "./CentreModal";
 import Select from "react-select";
 
-const PersonalProfileModal = () => {
+const PersonalProfileModal = (props) => {
   const customStyles = {
     control: (base) => ({
       ...base,
@@ -30,7 +30,7 @@ const PersonalProfileModal = () => {
 
   return (
     <div>
-      <CentreModal>
+      <CentreModal hideModal={props.hideModal}>
         <div className="block">
           <div>
             <label className="font-bold">Full Name</label>

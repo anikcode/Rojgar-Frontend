@@ -1,5 +1,5 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const Modal = styled.div`
@@ -41,19 +41,29 @@ const ModalWrapper = styled.div`
   width: 100vw;
   position: absolute;
 `;
-const CentreModal = (props) => (
-  <ModalWrapper>
-    <Modal>
-      <ModalHeader>Create Profile</ModalHeader>
-      <ModalBody>{props.children}</ModalBody>
-      <ModalFooter>
-        <Button variant="contained">Save</Button>
-        <Button variant="outlined" className="ml-5">
-          Cancel
-        </Button>
-      </ModalFooter>
-    </Modal>
-  </ModalWrapper>
-);
+const CentreModal = (props) => {
+  const handleClick = () => {
+    props.handleClick();
+  };
+  const hideModal = () => {
+    props.hideModal(false);
+  };
+  return (
+    <ModalWrapper>
+      <Modal>
+        <ModalHeader>Create Profile</ModalHeader>
+        <ModalBody>{props.children}</ModalBody>
+        <ModalFooter>
+          <Button variant="contained" onClick={handleClick}>
+            Save
+          </Button>
+          <Button variant="outlined" className="ml-5" onClick={hideModal}>
+            Cancel
+          </Button>
+        </ModalFooter>
+      </Modal>
+    </ModalWrapper>
+  );
+};
 
 export default CentreModal;
