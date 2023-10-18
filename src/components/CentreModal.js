@@ -40,16 +40,29 @@ const ModalWrapper = styled.div`
   background: rgba(0, 0, 0, 0.7);
   width: 100vw;
   position: absolute;
+  &.fadeOut {
+    animation: fadeOut 1s;
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
 `;
 const CentreModal = (props) => {
   const handleClick = () => {
     props.handleClick();
   };
   const hideModal = () => {
-    props.hideModal(false);
+    document.querySelector(".fade-in-image").classList.add("fadeOut");
+    setTimeout(props.hideModal, 150);
   };
   return (
-    <ModalWrapper>
+    <ModalWrapper className="fade-in-image">
       <Modal>
         <ModalHeader>Create Profile</ModalHeader>
         <ModalBody>{props.children}</ModalBody>
