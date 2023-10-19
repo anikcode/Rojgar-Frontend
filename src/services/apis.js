@@ -101,3 +101,20 @@ export async function saveProfileDetails(
     throw err;
   }
 }
+
+export async function getProfileDetails() {
+  try {
+    const response = await axios.get(
+      `${config.apiBaseUrl}/opt-in/get-profile-details`
+    );
+    if (response.data.message == "success") {
+      // console.log(response.data.response, "response.data");
+      return response.data.response;
+    }
+    const err = response.data.errorMessage;
+    throw err;
+  } catch (err) {
+    showError(err);
+    throw err;
+  }
+}
