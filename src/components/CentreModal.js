@@ -56,6 +56,7 @@ const ModalWrapper = styled.div`
 const CentreModal = (props) => {
   const handleClick = () => {
     props.handleClick();
+    hideModal();
   };
   const hideModal = () => {
     document.querySelector(".fade-in-image").classList.add("fadeOut");

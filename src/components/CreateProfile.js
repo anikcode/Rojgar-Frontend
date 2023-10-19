@@ -23,8 +23,8 @@ const CreateProfile = () => {
               onClick={() => setShowModal(true)}
             >
               <div className="">Personal Details</div>
-              <div className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600">
-                <span className="text-lg font-medium text-white ">
+              <div className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600 cursor-pointer">
+                <span className="text-lg font-medium text-white">
                   Create your profile
                 </span>
                 <div className="text-white ml-2">

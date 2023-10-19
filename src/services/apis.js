@@ -77,3 +77,27 @@ export async function loginUser(email, password) {
     throw err;
   }
 }
+
+export async function saveProfileDetails(
+  dob,
+  name,
+  gender,
+  careerBreak,
+  address
+) {
+  const body = { dob, name, gender, careerBreak, address };
+  try {
+    const response = await axios.post(
+      `${config.apiBaseUrl}/opt-in/save-profile-details`,
+      body
+    );
+    if (response.data.message == "success") {
+      return response;
+    }
+    const err = response.data.errorMessage;
+    throw err;
+  } catch (err) {
+    showError(err);
+    throw err;
+  }
+}

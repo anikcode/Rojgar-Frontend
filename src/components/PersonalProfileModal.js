@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CentreModal from "./CentreModal";
 import Select from "react-select";
+import { saveProfileDetails } from "../services/apis";
 
 const PersonalProfileModal = (props) => {
   const customStyles = {
@@ -15,7 +16,9 @@ const PersonalProfileModal = (props) => {
       value: start + index,
     }));
   };
-
+  const saveProfileData = (dob, name, gender, careerBreak, address) => {
+    return saveProfileDetails(dob, name, gender, careerBreak, address);
+  };
   useEffect(() => {
     setDate(createOptionsArray(1, 31));
     setMonth(createOptionsArray(1, 12));
@@ -27,10 +30,19 @@ const PersonalProfileModal = (props) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
-
+  const [gender, setGender] = useState("");
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [careerBreak, setCareerBreak] = useState("");
+  const dob = `${selectedDate?.value}-${selectedMonth?.value}-${selectedYear?.value}`;
   return (
     <div>
-      <CentreModal hideModal={props.hideModal}>
+      <CentreModal
+        hideModal={props.hideModal}
+        handleClick={() =>
+          saveProfileData(dob, name, gender, careerBreak, address)
+        }
+      >
         <div className="block">
           <div>
             <label className="font-bold">Full Name</label>
@@ -38,8 +50,8 @@ const PersonalProfileModal = (props) => {
               <div className="w-full">
                 <input
                   type="text"
-                  // value={name}
-                  // onChange={(e) => setName(e.target.value)}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="border p-2 pl-4 w-full flex mb-4 mt-1 border-black rounded-2xl"
                   placeholder="Enter Your Name"
                 />
@@ -52,11 +64,22 @@ const PersonalProfileModal = (props) => {
             <label className="font-bold">Gender</label>
           </div>
           <div className="gap-3 flex mt-1">
-            <span className="p-2 border rounded-2xl border-gray-400">Male</span>
-            <span className="p-2 border rounded-2xl border-gray-400">
+            <span
+              className="p-2 border rounded-2xl border-gray-400"
+              onClick={() => setGender("male")}
+            >
+              Male
+            </span>
+            <span
+              className="p-2 border rounded-2xl border-gray-400"
+              onClick={() => setGender("female")}
+            >
               Female
             </span>
-            <span className="p-2 border rounded-2xl border-gray-400">
+            <span
+              className="p-2 border rounded-2xl border-gray-400"
+              onClick={() => setGender("transgender")}
+            >
               Transgender
             </span>
           </div>
@@ -102,9 +125,19 @@ const PersonalProfileModal = (props) => {
           <div>
             <label className="font-bold">Have you taken a career break</label>
             <div className="flex gap-2">
-              <input type="radio" name="yes" value="Yes" />
+              <input
+                type="radio"
+                name="yes"
+                value="Yes"
+                onChange={(e) => setCareerBreak("yes")}
+              />
               <label className="mr-32">Yes</label>
-              <input type="radio" name="no" value="No" />
+              <input
+                type="radio"
+                name="no"
+                value="No"
+                onChange={(e) => setCareerBreak("no")}
+              />
               <label>No</label>
             </div>
           </div>
@@ -116,8 +149,8 @@ const PersonalProfileModal = (props) => {
             <label className="font-bold">Address</label>
             <input
               type="text"
-              // value={name}
-              // onChange={(e) => setName(e.target.value)}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
               className="border p-2 pl-4 w-full flex mb-4 mt-1 border-black rounded-2xl"
               placeholder="Enter Your Address"
             />
