@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CentreModal from "./CentreModal";
 import Select from "react-select";
-import { saveProfileDetails } from "../services/apis";
+import { getProfileDetails, saveProfileDetails } from "../services/apis";
 
 const PersonalProfileModal = (props) => {
   const customStyles = {
@@ -20,10 +20,28 @@ const PersonalProfileModal = (props) => {
     return saveProfileDetails(dob, name, gender, careerBreak, address);
   };
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getProfileDetails();
+        setResponse(response);
+        setName(response[0]?.name);
+        setAddress(response[0]?.address);
+        setCareerBreak(response[0]?.career_break);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+
     setDate(createOptionsArray(1, 31));
     setMonth(createOptionsArray(1, 12));
     setYear(createOptionsArray(1930, 2023));
+    setName(response[0]?.name);
+    console.log(response[0], "rest");
   }, []);
+
+  const [response, setResponse] = useState([]);
+  console.log(typeof response[0]?.career_break, "rest");
   const [date, setDate] = useState([]);
   const [month, setMonth] = useState([]);
   const [year, setYear] = useState([]);
@@ -31,7 +49,7 @@ const PersonalProfileModal = (props) => {
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
   const [gender, setGender] = useState("");
-  const [name, setName] = useState("");
+  const [name, setName] = useState(response[0]?.name);
   const [address, setAddress] = useState("");
   const [careerBreak, setCareerBreak] = useState("");
   const dob = `${selectedDate?.value}-${selectedMonth?.value}-${selectedYear?.value}`;
@@ -127,15 +145,15 @@ const PersonalProfileModal = (props) => {
             <div className="flex gap-2">
               <input
                 type="radio"
-                name="yes"
-                value="Yes"
+                name={careerBreak}
+                value={careerBreak}
                 onChange={(e) => setCareerBreak("yes")}
               />
               <label className="mr-32">Yes</label>
               <input
                 type="radio"
-                name="no"
-                value="No"
+                name={careerBreak}
+                value={careerBreak}
                 onChange={(e) => setCareerBreak("no")}
               />
               <label>No</label>

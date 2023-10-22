@@ -5,6 +5,7 @@ import CentreModal from "./CentreModal";
 import PersonalProfileModal from "./PersonalProfileModal";
 import ShowProfileDetails from "./ShowProfileDetails";
 import { getProfileDetails } from "../services/apis";
+import EditIcon from "@mui/icons-material/Edit";
 
 const CreateProfile = () => {
   useEffect(() => {
@@ -16,13 +17,12 @@ const CreateProfile = () => {
         console.error("Error fetching data:", error);
       }
     };
-
-    // Call the async function
     fetchData();
   }, []);
-  // console.log(response, "rtttt");
+
   const [showModal, setShowModal] = useState(false);
   const [response, setResponse] = useState([]);
+  console.log(response && response.length, "length of res");
   return (
     <div>
       <Header />
@@ -41,19 +41,26 @@ const CreateProfile = () => {
                 onClick={() => setShowModal(true)}
               >
                 <div className="">Personal Details</div>
-                <div className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600 cursor-pointer">
-                  <span className="text-lg font-medium text-white">
-                    Create your profile
-                  </span>
-                  <div className="text-white ml-2">
-                    <AddCircleRoundedIcon />
+                {response && response.length == 0 ? (
+                  <div className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600 cursor-pointer">
+                    <span className="text-lg font-medium text-white">
+                      Create your profile
+                    </span>
+                    <div className="text-white ml-2">
+                      <AddCircleRoundedIcon />
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="mr-8 mb-4 cursor-pointer">
+                    <EditIcon />
+                  </div>
+                )}
               </div>
               <div className="block">
                 <ShowProfileDetails response={response} />
               </div>
             </div>
+
             <div className="flex  h-fit w-[1100px] justify-between font-semibold rounded-lg p-4 mt-5 shadow-lg bg-white">
               <div className="">Career Profile</div>
               <div className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600">
@@ -65,6 +72,7 @@ const CreateProfile = () => {
                 </div>
               </div>
             </div>
+
             <div className="flex  h-fit w-[1100px] justify-between font-semibold rounded-lg p-4 mt-5 shadow-lg bg-white">
               <div className="">Profile Summary</div>
               <div className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600">
