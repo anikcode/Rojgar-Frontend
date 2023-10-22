@@ -22,12 +22,11 @@ const CreateProfile = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [response, setResponse] = useState([]);
-  console.log(response && response.length, "length of res");
   return (
     <div>
       <Header />
       {showModal && (
-        <PersonalProfileModal hideModal={(e) => setShowModal(false)} />
+        <PersonalProfileModal hideModal={() => setShowModal(false)} />
       )}
       <div className="bg-slate-50 flex">
         <div className="flex mt-4">
@@ -36,13 +35,13 @@ const CreateProfile = () => {
           </div>
           <div className="block">
             <div className="h-fit w-[1100px] font-semibold rounded-lg p-4 mt-5 shadow-lg bg-white">
-              <div
-                className="flex  h-fit w-[1100px] justify-between "
-                onClick={() => setShowModal(true)}
-              >
+              <div className="flex  h-fit w-[1100px] justify-between ">
                 <div className="">Personal Details</div>
                 {response && response.length == 0 ? (
-                  <div className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600 cursor-pointer">
+                  <div
+                    className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600 cursor-pointer"
+                    onClick={() => setShowModal(true)}
+                  >
                     <span className="text-lg font-medium text-white">
                       Create your profile
                     </span>
@@ -51,7 +50,10 @@ const CreateProfile = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="mr-8 mb-4 cursor-pointer">
+                  <div
+                    className="mr-8 mb-4 cursor-pointer"
+                    onClick={() => setShowModal(true)}
+                  >
                     <EditIcon />
                   </div>
                 )}

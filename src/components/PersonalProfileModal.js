@@ -147,14 +147,16 @@ const PersonalProfileModal = (props) => {
                 type="radio"
                 name={careerBreak}
                 value={careerBreak}
-                onChange={(e) => setCareerBreak("yes")}
+                checked={careerBreak === "yes"}
+                onChange={() => setCareerBreak("yes")}
               />
               <label className="mr-32">Yes</label>
               <input
                 type="radio"
                 name={careerBreak}
                 value={careerBreak}
-                onChange={(e) => setCareerBreak("no")}
+                checked={careerBreak === "no"}
+                onChange={() => setCareerBreak("no")}
               />
               <label>No</label>
             </div>
