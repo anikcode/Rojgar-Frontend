@@ -83,9 +83,11 @@ export async function saveProfileDetails(
   name,
   gender,
   careerBreak,
-  address
+  address,
+  isEdit,
+  userId
 ) {
-  const body = { dob, name, gender, careerBreak, address };
+  const body = { dob, name, gender, careerBreak, address, isEdit, userId };
   try {
     const response = await axios.post(
       `${config.apiBaseUrl}/opt-in/save-profile-details`,

@@ -6,8 +6,11 @@ import PersonalProfileModal from "./PersonalProfileModal";
 import ShowProfileDetails from "./ShowProfileDetails";
 import { getProfileDetails } from "../services/apis";
 import EditIcon from "@mui/icons-material/Edit";
+import { useDispatch } from "react-redux";
+import { userProfile } from "../redux/actions/userProfileActions";
 
 const CreateProfile = () => {
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,10 +21,15 @@ const CreateProfile = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [!showModal]);
 
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
   const [response, setResponse] = useState([]);
+  const dispatch = useDispatch();
+  const editProfile = () => {
+    setShowModal(true);
+    dispatch(userProfile("edit"));
+  };
   return (
     <div>
       <Header />
@@ -52,7 +60,7 @@ const CreateProfile = () => {
                 ) : (
                   <div
                     className="mr-8 mb-4 cursor-pointer"
-                    onClick={() => setShowModal(true)}
+                    onClick={editProfile}
                   >
                     <EditIcon />
                   </div>

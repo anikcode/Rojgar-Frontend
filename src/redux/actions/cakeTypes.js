@@ -2,6 +2,7 @@ export const BUY_CAKE = "BUY_CAKE";
 export const BUY_ICECREAM = "BUY_ICECREAM";
 export const SHOW_ERROR = "SHOW_ERROR";
 export const HIDE_ERROR = "HIDE_ERROR";
+export const USER_PROFILE = "USER_PROFILE";
 export const FETCH_DATA_SUCCEEDED = "FETCH_DATA_SUCCEEDED";
 export const FETCH_DATA_REQUESTED = "FETCH_DATA_REQUESTED";
 export const FETCH_DATA_FAILED = "FETCH_DATA_FAILED";

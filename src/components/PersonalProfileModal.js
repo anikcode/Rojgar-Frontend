@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CentreModal from "./CentreModal";
 import Select from "react-select";
 import { getProfileDetails, saveProfileDetails } from "../services/apis";
+import { useSelector } from "react-redux";
 
 const PersonalProfileModal = (props) => {
   const customStyles = {
@@ -10,14 +11,32 @@ const PersonalProfileModal = (props) => {
       borderRadius: "10px",
     }),
   };
+  const isEdit = useSelector((state) => state.userProfile.editProfile.editUser);
   const createOptionsArray = (start, end) => {
     return Array.from({ length: end - start + 1 }, (_, index) => ({
       label: start + index,
       value: start + index,
     }));
   };
-  const saveProfileData = (dob, name, gender, careerBreak, address) => {
-    return saveProfileDetails(dob, name, gender, careerBreak, address);
+
+  const saveProfileData = (
+    dob,
+    name,
+    gender,
+    careerBreak,
+    address,
+    isEdit,
+    userId
+  ) => {
+    return saveProfileDetails(
+      dob,
+      name,
+      gender,
+      careerBreak,
+      address,
+      isEdit,
+      userId
+    );
   };
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +46,14 @@ const PersonalProfileModal = (props) => {
         setName(response[0]?.name);
         setAddress(response[0]?.address);
         setCareerBreak(response[0]?.career_break);
+        setUserId(response[0]?.id);
+        const dob = response[0]?.dob;
+        const formattedDob = dob.split("-");
+        console.log(formattedDob[0], "formattedDob");
+        setSelectedDate({ label: formattedDob[0], value: formattedDob[0] });
+        setSelectedMonth({ label: formattedDob[1], value: formattedDob[1] });
+        setSelectedYear({ label: formattedDob[2], value: formattedDob[2] });
+        setGender(response[0]?.gender);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -37,7 +64,6 @@ const PersonalProfileModal = (props) => {
     setMonth(createOptionsArray(1, 12));
     setYear(createOptionsArray(1930, 2023));
     setName(response[0]?.name);
-    console.log(response[0], "rest");
   }, []);
 
   const [response, setResponse] = useState([]);
@@ -52,13 +78,23 @@ const PersonalProfileModal = (props) => {
   const [name, setName] = useState(response[0]?.name);
   const [address, setAddress] = useState("");
   const [careerBreak, setCareerBreak] = useState("");
+  const [userId, setUserId] = useState("");
   const dob = `${selectedDate?.value}-${selectedMonth?.value}-${selectedYear?.value}`;
+  console.log("setSelectedDate", selectedDate);
   return (
     <div>
       <CentreModal
         hideModal={props.hideModal}
         handleClick={() =>
-          saveProfileData(dob, name, gender, careerBreak, address)
+          saveProfileData(
+            dob,
+            name,
+            gender,
+            careerBreak,
+            address,
+            isEdit,
+            userId
+          )
         }
       >
         <div className="block">
