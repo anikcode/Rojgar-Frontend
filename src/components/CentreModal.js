@@ -39,7 +39,11 @@ const ModalWrapper = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
   width: 100%;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   &.fadeOut {
     animation: fadeOut 1s;
   }
@@ -63,7 +67,7 @@ const CentreModal = (props) => {
     setTimeout(props.hideModal, 150);
   };
   return (
-    <ModalWrapper className="fade-in-image">
+    <ModalWrapper className="fade-in-image" onClick={hideModal}>
       <Modal>
         <ModalHeader>Create Profile</ModalHeader>
         <ModalBody>{props.children}</ModalBody>
