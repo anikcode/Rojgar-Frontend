@@ -49,7 +49,6 @@ const PersonalProfileModal = (props) => {
         setUserId(response[0]?.id);
         const dob = response[0]?.dob;
         const formattedDob = dob.split("-");
-        console.log(formattedDob[0], "formattedDob");
         setSelectedDate({ label: formattedDob[0], value: formattedDob[0] });
         setSelectedMonth({ label: formattedDob[1], value: formattedDob[1] });
         setSelectedYear({ label: formattedDob[2], value: formattedDob[2] });
@@ -67,7 +66,6 @@ const PersonalProfileModal = (props) => {
   }, []);
 
   const [response, setResponse] = useState([]);
-  console.log(typeof response[0]?.career_break, "rest");
   const [date, setDate] = useState([]);
   const [month, setMonth] = useState([]);
   const [year, setYear] = useState([]);
@@ -80,7 +78,6 @@ const PersonalProfileModal = (props) => {
   const [careerBreak, setCareerBreak] = useState("");
   const [userId, setUserId] = useState("");
   const dob = `${selectedDate?.value}-${selectedMonth?.value}-${selectedYear?.value}`;
-  console.log("setSelectedDate", selectedDate);
   return (
     <div>
       <CentreModal

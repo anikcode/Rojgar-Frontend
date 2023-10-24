@@ -84,7 +84,7 @@ export async function saveProfileDetails(
   gender,
   careerBreak,
   address,
-  isEdit,
+  isEdit = "",
   userId
 ) {
   const body = { dob, name, gender, careerBreak, address, isEdit, userId };
@@ -111,6 +111,56 @@ export async function getProfileDetails() {
     );
     if (response.data.message == "success") {
       // console.log(response.data.response, "response.data");
+      return response.data.response;
+    }
+    const err = response.data.errorMessage;
+    throw err;
+  } catch (err) {
+    showError(err);
+    throw err;
+  }
+}
+
+export async function saveEmploymentDetails(
+  company,
+  employmentType,
+  totalExperience,
+  name,
+  designation,
+  joiningDate,
+  workedTill
+) {
+  const body = {
+    company,
+    employmentType,
+    totalExperience,
+    name,
+    designation,
+    joiningDate,
+    workedTill,
+  };
+  try {
+    const response = await axios.post(
+      `${config.apiBaseUrl}/opt-in/save-career-details`,
+      body
+    );
+    if (response.data.message == "success") {
+      return response;
+    }
+    const err = response.data.errorMessage;
+    throw err;
+  } catch (err) {
+    showError(err);
+    throw err;
+  }
+}
+
+export async function getCareerDetails() {
+  try {
+    const response = await axios.get(
+      `${config.apiBaseUrl}/opt-in/get-career-details`
+    );
+    if (response.data.message == "success") {
       return response.data.response;
     }
     const err = response.data.errorMessage;

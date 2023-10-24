@@ -36,9 +36,9 @@ const ModalFooter = styled.div`
   padding: 15px 3px 15px 3px;
 `;
 const ModalWrapper = styled.div`
-  height: 91vh;
+  height: 100%;
   background: rgba(0, 0, 0, 0.7);
-  width: 100vw;
+  width: 100%;
   position: absolute;
   &.fadeOut {
     animation: fadeOut 1s;

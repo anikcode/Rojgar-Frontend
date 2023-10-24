@@ -1,7 +1,6 @@
 import React from "react";
 
 const ShowProfileDetails = (props) => {
-  console.log(props.response[0], "pr");
   return (
     <div className="flex flex-1 justify-between bg-slate-100 p-4 rounded-lg">
       <div>
