@@ -122,15 +122,18 @@ export async function getProfileDetails() {
 }
 
 export async function saveEmploymentDetails(
+  id,
   company,
   employmentType,
   totalExperience,
   name,
   designation,
   joiningDate,
-  workedTill
+  workedTill,
+  isEdit
 ) {
   const body = {
+    id,
     company,
     employmentType,
     totalExperience,
@@ -138,6 +141,7 @@ export async function saveEmploymentDetails(
     designation,
     joiningDate,
     workedTill,
+    isEdit,
   };
   try {
     const response = await axios.post(
@@ -162,6 +166,24 @@ export async function getCareerDetails() {
     );
     if (response.data.message == "success") {
       return response.data.response;
+    }
+    const err = response.data.errorMessage;
+    throw err;
+  } catch (err) {
+    showError(err);
+    throw err;
+  }
+}
+
+export async function deleteEmploymentDetails(id) {
+  const body = { id };
+  try {
+    const response = await axios.post(
+      `${config.apiBaseUrl}/opt-in/delete-career-details`,
+      body
+    );
+    if (response.data.message == "success") {
+      return response;
     }
     const err = response.data.errorMessage;
     throw err;

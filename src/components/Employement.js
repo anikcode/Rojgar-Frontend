@@ -4,7 +4,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CentreModal from "./CentreModal";
 import Select from "react-select";
-import { getCareerDetails, saveEmploymentDetails } from "../services/apis";
+import { useDispatch } from "react-redux";
+import { userProfile } from "../redux/actions/userProfileActions";
+import {
+  deleteEmploymentDetails,
+  getCareerDetails,
+  saveEmploymentDetails,
+} from "../services/apis";
+import { useSelector } from "react-redux";
 
 const Employement = (props) => {
   const customStyles = {
@@ -19,7 +26,9 @@ const Employement = (props) => {
       value: start + index,
     }));
   };
+  const isEdit = useSelector((state) => state.userProfile.editProfile.editUser);
   const [response, setResponse] = useState([]);
+  const [id, setId] = useState(null);
   const [year, setYear] = useState([]);
   const [month, setMonth] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -51,16 +60,6 @@ const Employement = (props) => {
       try {
         const response = await getCareerDetails();
         setResponse(response);
-        // setName(response[0]?.name);
-        // setDesignation(response[0]?.designation);
-        // setCareerBreak(response[0]?.career_break);
-        // setUserId(response[0]?.id);
-        // const dob = response[0]?.dob;
-        // const formattedDob = dob.split("-");
-        // setSelectedDate({ label: formattedDob[0], value: formattedDob[0] });
-        // setSelectedMonth({ label: formattedDob[1], value: formattedDob[1] });
-        // setSelectedYear({ label: formattedDob[2], value: formattedDob[2] });
-        // setGender(response[0]?.gender);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -68,7 +67,72 @@ const Employement = (props) => {
     fetchData();
   }, [!showModal]);
   console.log(response, "employement response");
-
+  const dispatch = useDispatch();
+  const editProfile = (index = null) => {
+    if (index == "null") {
+      setShowModal(true);
+      setName("");
+      setDesignation("");
+      setEmploymentType("");
+      setCompany("");
+      setSelectedJoiningMonth(null);
+      setSelectedJoiningDate(null);
+      setSelectedDate(null);
+      setSelectedMonth(null);
+      setSelectedWorkTillYear(null);
+      setSelectedWorkTillMonth(null);
+      dispatch(userProfile(""));
+    } else {
+      setShowModal(true);
+      setId(response[index]?.id);
+      setName(response[index]?.name);
+      setDesignation(response[index]?.designation);
+      setEmploymentType(response[index]?.employment_type);
+      setCompany(response[index]?.company);
+      dispatch(userProfile("edit"));
+      const exp = response[index]?.total_experience;
+      const formattedDob = exp ? exp.split("-") : "";
+      const joining = response[index]?.joining_date;
+      const formattedJoining = joining ? joining.split("-") : "";
+      const work = response[index]?.worked_till;
+      const formattedWork = work ? work.split("-") : "";
+      setSelectedJoiningMonth({
+        label: formattedJoining[0],
+        value: formattedJoining[0],
+      });
+      setSelectedJoiningDate({
+        label: formattedJoining[1],
+        value: formattedJoining[1],
+      });
+      console.log(formattedDob, "formattedDob");
+      setSelectedDate({
+        label: formattedDob[0] !== "undefined " ? formattedDob[0] : "0",
+        value: formattedDob[0] !== "undefined " ? formattedDob[0] : "0",
+      });
+      setSelectedMonth({
+        label: formattedDob[1] !== "undefined " ? formattedDob[1] : "0",
+        value: formattedDob[1] !== "undefined " ? formattedDob[1] : "0",
+      });
+      setSelectedWorkTillYear({
+        label: formattedWork[0] !== "undefined " ? formattedWork[0] : "0",
+        value: formattedWork[0] !== "undefined " ? formattedWork[0] : "0",
+      });
+      setSelectedWorkTillMonth({
+        label: formattedWork[1] !== "undefined " ? formattedWork[1] : "0",
+        value: formattedWork[1] !== "undefined " ? formattedWork[1] : "0",
+      });
+    }
+    console.log(index, "index");
+  };
+  const deleteEmploymentDetailsFromIds = async (index) => {
+    try {
+      console.log(response[index]?.id, "response[index]?.id");
+      const res = await deleteEmploymentDetails(response[index]?.id);
+      setShowModal(true);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   return (
     <div>
       {showModal && (
@@ -77,13 +141,15 @@ const Employement = (props) => {
             hideModal={() => setShowModal(false)}
             handleClick={() =>
               saveEmploymentDetails(
+                id,
                 company,
                 employmentType,
                 totalExperience,
                 name,
                 designation,
                 joiningDate,
-                workedTill
+                workedTill,
+                isEdit
               )
             }
           >
@@ -271,7 +337,7 @@ const Employement = (props) => {
           ) : (
             <div
               className="mr-8 mb-4 cursor-pointer"
-              onClick={() => setShowModal(true)}
+              onClick={() => editProfile("null")}
             >
               <AddCircleRoundedIcon />
             </div>
@@ -279,19 +345,21 @@ const Employement = (props) => {
         </div>
         {response &&
           response.length > 0 &&
-          response.map((result) => (
+          response.map((result, index) => (
             <>
               <div className="block mb-7">
-                {console.log(result.designation, "repo")}
                 <div className="flex gap-5">
                   <div className="font-semibold">{result.designation}</div>
                   <div
-                    onClick={() => setShowModal(true)}
+                    onClick={() => editProfile(index)}
                     className="cursor-pointer"
                   >
                     <EditIcon />
                   </div>
-                  <div>
+                  <div
+                    onClick={() => deleteEmploymentDetailsFromIds(index)}
+                    className="cursor-pointer"
+                  >
                     <DeleteIcon />
                   </div>
                 </div>

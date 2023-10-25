@@ -67,7 +67,7 @@ const CentreModal = (props) => {
     setTimeout(props.hideModal, 150);
   };
   return (
-    <ModalWrapper className="fade-in-image" onClick={hideModal}>
+    <ModalWrapper className="fade-in-image">
       <Modal>
         <ModalHeader>Create Profile</ModalHeader>
         <ModalBody>{props.children}</ModalBody>
