@@ -74,34 +74,6 @@ const CreateProfile = () => {
               )}
             </div>
 
-            {/* <div className="h-fit w-[1100px] font-semibold rounded-lg p-4 mt-5 shadow-lg bg-white">
-              <div className="flex  h-fit w-[1100px] justify-between ">
-                <div className="">Employement</div>
-                {response && response.length == 0 ? (
-                  <div
-                    className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600 cursor-pointer"
-                    onClick={() => setShowModal(true)}
-                  >
-                    <span className="text-lg font-medium text-white">
-                      Create your profile
-                    </span>
-                    <div className="text-white ml-2">
-                      <AddCircleRoundedIcon />
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                    className="mr-8 mb-4 cursor-pointer"
-                    onClick={editProfile}
-                  >
-                    <EditIcon />
-                  </div>
-                )}
-              </div>
-              <div className="block">
-                <ShowProfileDetails response={response} />
-              </div>
-            </div> */}
             <Employement />
             <div className="flex  h-fit w-[1100px] justify-between font-semibold rounded-lg p-4 mt-5 shadow-lg bg-white">
               <div className="">Profile Summary</div>
@@ -127,17 +99,6 @@ const CreateProfile = () => {
             </div>
             <div className="flex  h-fit w-[1100px] justify-between font-semibold rounded-lg p-4 mt-5 shadow-lg bg-white">
               <div className="">Education</div>
-              <div className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600">
-                <span className="text-lg font-medium text-white ">
-                  Create your profile
-                </span>
-                <div className="text-white ml-2">
-                  <AddCircleRoundedIcon />
-                </div>
-              </div>
-            </div>
-            <div className="flex  h-fit w-[1100px] justify-between font-semibold rounded-lg p-4 mt-5 shadow-lg bg-white">
-              <div className="">Employement</div>
               <div className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600">
                 <span className="text-lg font-medium text-white ">
                   Create your profile

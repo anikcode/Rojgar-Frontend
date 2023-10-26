@@ -130,6 +130,7 @@ export async function saveEmploymentDetails(
   designation,
   joiningDate,
   workedTill,
+  jobDescription,
   isEdit
 ) {
   const body = {
@@ -141,6 +142,7 @@ export async function saveEmploymentDetails(
     designation,
     joiningDate,
     workedTill,
+    jobDescription,
     isEdit,
   };
   try {

@@ -6,6 +6,7 @@ import CentreModal from "./CentreModal";
 import Select from "react-select";
 import { useDispatch } from "react-redux";
 import { userProfile } from "../redux/actions/userProfileActions";
+import Draggable from "react-draggable";
 import {
   deleteEmploymentDetails,
   getCareerDetails,
@@ -43,12 +44,14 @@ const Employement = (props) => {
   const [selectedWorkTillMonth, setSelectedWorkTillMonth] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [company, setCompany] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
   const [employmentType, setEmploymentType] = useState("");
   const [name, setName] = useState("");
   const [designation, setDesignation] = useState("");
   const totalExperience = `${selectedDate?.value} - ${selectedMonth?.value}`;
   const joiningDate = `${selectedJoiningDate?.value} - ${selectedJoiningMonth?.value}`;
   const workedTill = `${selectedWorkTillYear?.value} - ${selectedWorkTillMonth?.value}`;
+  const [deletedProfile, setDeletedProfile] = useState(false);
   useEffect(() => {
     setYear(createOptionsArray(1, 10));
     setMonth(createOptionsArray(1, 12));
@@ -65,7 +68,7 @@ const Employement = (props) => {
       }
     };
     fetchData();
-  }, [!showModal]);
+  }, [!showModal, deletedProfile]);
   console.log(response, "employement response");
   const dispatch = useDispatch();
   const editProfile = (index = null) => {
@@ -82,10 +85,12 @@ const Employement = (props) => {
       setSelectedWorkTillYear(null);
       setSelectedWorkTillMonth(null);
       dispatch(userProfile(""));
+      setJobDescription("");
     } else {
       setShowModal(true);
       setId(response[index]?.id);
       setName(response[index]?.name);
+      setJobDescription(response[index]?.job_description);
       setDesignation(response[index]?.designation);
       setEmploymentType(response[index]?.employment_type);
       setCompany(response[index]?.company);
@@ -128,7 +133,7 @@ const Employement = (props) => {
     try {
       console.log(response[index]?.id, "response[index]?.id");
       const res = await deleteEmploymentDetails(response[index]?.id);
-      setShowModal(true);
+      setDeletedProfile(true);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -149,6 +154,7 @@ const Employement = (props) => {
                 designation,
                 joiningDate,
                 workedTill,
+                jobDescription,
                 isEdit
               )
             }
@@ -316,6 +322,22 @@ const Employement = (props) => {
                 </span>
               </div>
             </div>
+            <div className="block">
+              <div>
+                <label className="font-bold">Profile Description</label>
+                <div className="flex">
+                  <div className="w-full">
+                    <input
+                      type="text"
+                      value={jobDescription}
+                      onChange={(e) => setJobDescription(e.target.value)}
+                      className="border p-2 pl-4 w-full flex mb-4 mt-1 border-black rounded-2xl"
+                      placeholder="Type your job description"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </CentreModal>
         </div>
       )}
@@ -347,7 +369,7 @@ const Employement = (props) => {
           response.length > 0 &&
           response.map((result, index) => (
             <>
-              <div className="block mb-7">
+              <div className="block mb-7 ">
                 <div className="flex gap-5">
                   <div className="font-semibold">{result.designation}</div>
                   <div
@@ -358,7 +380,7 @@ const Employement = (props) => {
                   </div>
                   <div
                     onClick={() => deleteEmploymentDetailsFromIds(index)}
-                    className="cursor-pointer"
+                    className="cursor-pointer text-red-700"
                   >
                     <DeleteIcon />
                   </div>
@@ -369,7 +391,7 @@ const Employement = (props) => {
                   <span>Nov 2022 to Present </span>
                 </div>
                 <div className="font-normal text-s">
-                  Worked on skills like html,css,javascript
+                  {result.job_description}
                 </div>
               </div>
             </>
