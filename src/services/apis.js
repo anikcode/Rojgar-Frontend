@@ -194,3 +194,69 @@ export async function deleteEmploymentDetails(id) {
     throw err;
   }
 }
+
+export async function deleteProjectDetails(id) {
+  const body = { id };
+  try {
+    const response = await axios.post(
+      `${config.apiBaseUrl}/opt-in/delete-project-details`,
+      body
+    );
+    if (response.data.message == "success") {
+      return response;
+    }
+    const err = response.data.errorMessage;
+    throw err;
+  } catch (err) {
+    showError(err);
+    throw err;
+  }
+}
+
+export async function getProjectDetails() {
+  try {
+    const response = await axios.get(
+      `${config.apiBaseUrl}/opt-in/get-project-details`
+    );
+    if (response.data.message == "success") {
+      return response.data.response;
+    }
+    const err = response.data.errorMessage;
+    throw err;
+  } catch (err) {
+    showError(err);
+    throw err;
+  }
+}
+
+export async function saveProjectDetails(
+  id,
+  title,
+  description,
+  joiningDate,
+  workedTill,
+  isEdit
+) {
+  const body = {
+    id,
+    title,
+    description,
+    joiningDate,
+    workedTill,
+    isEdit,
+  };
+  try {
+    const response = await axios.post(
+      `${config.apiBaseUrl}/opt-in/save-project-details`,
+      body
+    );
+    if (response.data.message == "success") {
+      return response;
+    }
+    const err = response.data.errorMessage;
+    throw err;
+  } catch (err) {
+    showError(err);
+    throw err;
+  }
+}
