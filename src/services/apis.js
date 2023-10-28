@@ -260,3 +260,73 @@ export async function saveProjectDetails(
     throw err;
   }
 }
+
+export async function saveEducationDetails(
+  id,
+  schoolName,
+  degreeName,
+  joiningDate,
+  workedTill,
+  grade,
+  description,
+  isEdit
+) {
+  const body = {
+    id,
+    schoolName,
+    degreeName,
+    joiningDate,
+    workedTill,
+    grade,
+    description,
+    isEdit,
+  };
+  try {
+    const response = await axios.post(
+      `${config.apiBaseUrl}/opt-in/save-education-details`,
+      body
+    );
+    if (response.data.message == "success") {
+      return response;
+    }
+    const err = response.data.errorMessage;
+    throw err;
+  } catch (err) {
+    showError(err);
+    throw err;
+  }
+}
+
+export async function getEducationDetails() {
+  try {
+    const response = await axios.get(
+      `${config.apiBaseUrl}/opt-in/get-education-details`
+    );
+    if (response.data.message == "success") {
+      return response.data.response;
+    }
+    const err = response.data.errorMessage;
+    throw err;
+  } catch (err) {
+    showError(err);
+    throw err;
+  }
+}
+
+export async function deleteEducationDetails(id) {
+  const body = { id };
+  try {
+    const response = await axios.post(
+      `${config.apiBaseUrl}/opt-in/delete-education-details`,
+      body
+    );
+    if (response.data.message == "success") {
+      return response;
+    }
+    const err = response.data.errorMessage;
+    throw err;
+  } catch (err) {
+    showError(err);
+    throw err;
+  }
+}

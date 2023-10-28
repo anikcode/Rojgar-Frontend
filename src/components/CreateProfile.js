@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { userProfile } from "../redux/actions/userProfileActions";
 import Employement from "./Employement";
 import Project from "./Project";
+import Education from "./Education";
 
 const CreateProfile = () => {
   const [showModal, setShowModal] = useState(false);
@@ -77,28 +78,8 @@ const CreateProfile = () => {
 
             <Employement />
             <Project />
-            <div className="flex  h-fit w-[1100px] justify-between font-semibold rounded-lg p-4 mt-5 shadow-lg bg-white">
-              <div className="">Projects</div>
-              <div className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600">
-                <span className="text-lg font-medium text-white ">
-                  Create your profile
-                </span>
-                <div className="text-white ml-2">
-                  <AddCircleRoundedIcon />
-                </div>
-              </div>
-            </div>
-            <div className="flex  h-fit w-[1100px] justify-between font-semibold rounded-lg p-4 mt-5 shadow-lg bg-white">
-              <div className="">Education</div>
-              <div className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600">
-                <span className="text-lg font-medium text-white ">
-                  Create your profile
-                </span>
-                <div className="text-white ml-2">
-                  <AddCircleRoundedIcon />
-                </div>
-              </div>
-            </div>
+            <Education />
+
             <div className="flex  h-fit w-[1100px] justify-between font-semibold rounded-lg p-4 mt-5 shadow-lg bg-white">
               <div className="">Key Skills</div>
               <div className="items-center flex justify-center w-[250px] h-[50px] flex rounded-2xl bg-blue-600">
