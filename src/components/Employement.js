@@ -4,7 +4,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CentreModal from "./CentreModal";
 import Select from "react-select";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userProfile } from "../redux/actions/userProfileActions";
 import Draggable from "react-draggable";
 import {
@@ -12,7 +12,6 @@ import {
   getCareerDetails,
   saveEmploymentDetails,
 } from "../services/apis";
-import { useSelector } from "react-redux";
 
 const Employement = (props) => {
   const customStyles = {
@@ -52,6 +51,8 @@ const Employement = (props) => {
   const joiningDate = `${selectedJoiningDate?.value} - ${selectedJoiningMonth?.value}`;
   const workedTill = `${selectedWorkTillYear?.value} - ${selectedWorkTillMonth?.value}`;
   const [deletedProfile, setDeletedProfile] = useState(false);
+  const authToken = useSelector((state) => state.authToken.authToken.authToken);
+  console.log(authToken, "authToken");
   useEffect(() => {
     setYear(createOptionsArray(1, 10));
     setMonth(createOptionsArray(1, 12));
@@ -61,7 +62,7 @@ const Employement = (props) => {
     setWorkTillMonth(createOptionsArray(1, 12));
     const fetchData = async () => {
       try {
-        const response = await getCareerDetails();
+        const response = await getCareerDetails(authToken);
         setResponse(response);
       } catch (error) {
         console.error("Error fetching data:", error);

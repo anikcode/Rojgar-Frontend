@@ -161,10 +161,16 @@ export async function saveEmploymentDetails(
   }
 }
 
-export async function getCareerDetails() {
+export async function getCareerDetails(authToken) {
+  const headers = {
+    authorization: authToken,
+  };
   try {
     const response = await axios.get(
-      `${config.apiBaseUrl}/opt-in/get-career-details`
+      `${config.apiBaseUrl}/opt-in/get-career-details`,
+      {
+        headers,
+      }
     );
     if (response.data.message == "success") {
       return response.data.response;

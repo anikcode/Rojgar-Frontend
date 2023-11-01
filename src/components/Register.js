@@ -6,6 +6,8 @@ import Header from "./Header";
 import SwiperDrawer from "./SwiperDrawer";
 import { useNavigate } from "react-router-dom";
 import CentreModal from "./CentreModal";
+import { useDispatch } from "react-redux";
+import { authToken } from "../redux/actions/authActions";
 function Register() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -15,6 +17,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const isValidPassword = confirmPassword === password;
   const validateEmail = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+  const dispatch = useDispatch();
   const registerToLogin = async (
     name,
     email,
@@ -32,7 +35,9 @@ function Register() {
       );
       console.log(response, "reeeeeee");
       if (response.message === "success") {
-        navigate("/homepage");
+        console.log(response.token, "on register");
+        dispatch(authToken(response.token));
+        navigate("/create-profile");
       }
     } catch (err) {}
   };
