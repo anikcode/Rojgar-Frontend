@@ -104,10 +104,16 @@ export async function saveProfileDetails(
   }
 }
 
-export async function getProfileDetails() {
+export async function getProfileDetails(authToken) {
+  const headers = {
+    authorization: authToken,
+  };
   try {
     const response = await axios.get(
-      `${config.apiBaseUrl}/opt-in/get-profile-details`
+      `${config.apiBaseUrl}/opt-in/get-profile-details`,
+      {
+        headers,
+      }
     );
     if (response.data.message == "success") {
       // console.log(response.data.response, "response.data");
@@ -219,10 +225,16 @@ export async function deleteProjectDetails(id) {
   }
 }
 
-export async function getProjectDetails() {
+export async function getProjectDetails(authToken) {
+  const headers = {
+    authorization: authToken,
+  };
   try {
     const response = await axios.get(
-      `${config.apiBaseUrl}/opt-in/get-project-details`
+      `${config.apiBaseUrl}/opt-in/get-project-details`,
+      {
+        headers,
+      }
     );
     if (response.data.message == "success") {
       return response.data.response;
@@ -303,10 +315,16 @@ export async function saveEducationDetails(
   }
 }
 
-export async function getEducationDetails() {
+export async function getEducationDetails(authToken) {
+  const headers = {
+    authorization: authToken,
+  };
   try {
     const response = await axios.get(
-      `${config.apiBaseUrl}/opt-in/get-education-details`
+      `${config.apiBaseUrl}/opt-in/get-education-details`,
+      {
+        headers,
+      }
     );
     if (response.data.message == "success") {
       return response.data.response;

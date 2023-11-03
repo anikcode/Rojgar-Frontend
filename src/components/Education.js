@@ -45,6 +45,7 @@ const Education = (props) => {
   const joiningDate = `${selectedJoiningDate?.value} - ${selectedJoiningMonth?.value}`;
   const workedTill = `${selectedWorkTillYear?.value} - ${selectedWorkTillMonth?.value}`;
   const [deletedProfile, setDeletedProfile] = useState(false);
+  const authToken = useSelector((state) => state.authToken.authToken.authToken);
   useEffect(() => {
     setJoiningYear(createOptionsArray(1980, 2023));
     setJoiningMonth(createOptionsArray(1, 12));
@@ -52,7 +53,7 @@ const Education = (props) => {
     setWorkTillMonth(createOptionsArray(1, 12));
     const fetchData = async () => {
       try {
-        const response = await getEducationDetails();
+        const response = await getEducationDetails(authToken);
         setResponse(response);
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -12,6 +12,7 @@ const PersonalProfileModal = (props) => {
     }),
   };
   const isEdit = useSelector((state) => state.userProfile.editProfile.editUser);
+  const authToken = useSelector((state) => state.authToken.authToken.authToken);
   const createOptionsArray = (start, end) => {
     return Array.from({ length: end - start + 1 }, (_, index) => ({
       label: start + index,
@@ -41,7 +42,7 @@ const PersonalProfileModal = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getProfileDetails();
+        const response = await getProfileDetails(authToken);
         setResponse(response);
         setName(response[0]?.name);
         setAddress(response[0]?.address);

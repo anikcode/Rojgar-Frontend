@@ -11,14 +11,16 @@ import { userProfile } from "../redux/actions/userProfileActions";
 import Employement from "./Employement";
 import Project from "./Project";
 import Education from "./Education";
+import { useSelector } from "react-redux";
 import Skills from "./Skills";
 
 const CreateProfile = () => {
   const [showModal, setShowModal] = useState(false);
+  const authToken = useSelector((state) => state.authToken.authToken.authToken);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getProfileDetails();
+        const response = await getProfileDetails(authToken);
         setResponse(response);
       } catch (error) {
         console.error("Error fetching data:", error);
