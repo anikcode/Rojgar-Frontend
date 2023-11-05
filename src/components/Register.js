@@ -33,9 +33,7 @@ function Register() {
         password,
         confirmPassword
       );
-      console.log(response, "reeeeeee");
       if (response.message === "success") {
-        console.log(response.token, "on register");
         dispatch(authToken(response.token));
         navigate("/create-profile");
       }

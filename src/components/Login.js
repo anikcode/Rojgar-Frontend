@@ -6,10 +6,6 @@ import { loginUser } from "../services/apis";
 import { useNavigate } from "react-router-dom";
 
 function Login(props) {
-  // const location = useLocation();
-  // const passedProps = location.state;
-  // console.log(passedProps);
-  // return <div>Logged in {passedProps.name}</div>;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

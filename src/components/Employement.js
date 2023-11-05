@@ -52,7 +52,6 @@ const Employement = (props) => {
   const workedTill = `${selectedWorkTillYear?.value} - ${selectedWorkTillMonth?.value}`;
   const [deletedProfile, setDeletedProfile] = useState(false);
   const authToken = useSelector((state) => state.authToken.authToken.authToken);
-  console.log(authToken, "authToken");
   useEffect(() => {
     setYear(createOptionsArray(1, 10));
     setMonth(createOptionsArray(1, 12));
@@ -70,7 +69,6 @@ const Employement = (props) => {
     };
     fetchData();
   }, [!showModal, deletedProfile]);
-  console.log(response, "employement response");
   const dispatch = useDispatch();
   const editProfile = (index = null) => {
     if (index == "null") {
@@ -110,7 +108,6 @@ const Employement = (props) => {
         label: formattedJoining[1],
         value: formattedJoining[1],
       });
-      console.log(formattedDob, "formattedDob");
       setSelectedDate({
         label: formattedDob[0] !== "undefined " ? formattedDob[0] : "0",
         value: formattedDob[0] !== "undefined " ? formattedDob[0] : "0",
@@ -128,11 +125,9 @@ const Employement = (props) => {
         value: formattedWork[1] !== "undefined " ? formattedWork[1] : "0",
       });
     }
-    console.log(index, "index");
   };
   const deleteEmploymentDetailsFromIds = async (index) => {
     try {
-      console.log(response[index]?.id, "response[index]?.id");
       const res = await deleteEmploymentDetails(response[index]?.id);
       setDeletedProfile(true);
     } catch (error) {

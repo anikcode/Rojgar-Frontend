@@ -62,7 +62,6 @@ const Project = (props) => {
     };
     fetchData();
   }, [!showModal, deletedProfile]);
-  console.log(response, "employement response");
   const dispatch = useDispatch();
   const editProfile = (index = null) => {
     if (index == "null") {
@@ -100,7 +99,6 @@ const Project = (props) => {
         label: formattedJoining[1],
         value: formattedJoining[1],
       });
-      console.log(formattedDob, "formattedDob");
       setSelectedWorkTillYear({
         label: formattedWork[0] !== "undefined " ? formattedWork[0] : "0",
         value: formattedWork[0] !== "undefined " ? formattedWork[0] : "0",
@@ -110,11 +108,9 @@ const Project = (props) => {
         value: formattedWork[1] !== "undefined " ? formattedWork[1] : "0",
       });
     }
-    console.log(index, "index");
   };
   const deleteProjectDetailsFromIds = async (index) => {
     try {
-      console.log(response[index]?.id, "response[index]?.id");
       const res = await deleteProjectDetails(response[index]?.id);
       setDeletedProfile(true);
     } catch (error) {

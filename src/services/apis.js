@@ -35,7 +35,6 @@ export function submitDetails(name, email, phone, password, confirmPassword) {
     .post(`${config.apiBaseUrl}/opt-in/register`, body)
     .then((response) => {
       const responseBody = response.data;
-      console.log("till here", responseBody);
       if (responseBody.message === "success") {
         return responseBody;
       }
@@ -70,7 +69,6 @@ export async function loginUser(email, password) {
     }
 
     const err = response.data.errorMessage;
-    console.log(response.data.errorMessage, "errrrrrr");
     throw err;
   } catch (err) {
     showError(err);
